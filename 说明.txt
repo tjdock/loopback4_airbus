@@ -2,34 +2,34 @@
 >npm install -g @loopback/cli
 >lb4 -v
 @loopback/* dependencies:
-  - @loopback/authentication: ^1.1.0
-  - @loopback/boot: ^1.1.3
-  - @loopback/build: ^1.4.1
-  - @loopback/context: ^1.9.0
-  - @loopback/core: ^1.3.0
-  - @loopback/metadata: ^1.0.11
-  - @loopback/openapi-spec-builder: ^1.1.3
-  - @loopback/openapi-v3-types: ^1.0.11
-  - @loopback/openapi-v3: ^1.3.3
-  - @loopback/repository-json-schema: ^1.3.7
-  - @loopback/repository: ^1.3.0
-  - @loopback/rest: ^1.10.0
-  - @loopback/testlab: ^1.2.2
-  - @loopback/docs: ^1.12.0
-  - @loopback/example-hello-world: ^1.1.9
-  - @loopback/example-log-extension: ^1.1.9
-  - @loopback/example-rpc-server: ^1.1.8
-  - @loopback/example-todo: ^1.5.4
-  - @loopback/example-soap-calculator: ^1.4.4
-  - @loopback/service-proxy: ^1.1.2
-  - @loopback/http-caching-proxy: ^1.0.12
-  - @loopback/http-server: ^1.1.11
-  - @loopback/example-todo-list: ^1.5.4
+  - @loopback/authentication: ^1.1.1
+  - @loopback/boot: ^1.2.0
+  - @loopback/build: ^1.4.2
+  - @loopback/context: ^1.10.0
+  - @loopback/core: ^1.4.0
+  - @loopback/metadata: ^1.0.12
+  - @loopback/openapi-spec-builder: ^1.1.4
+  - @loopback/openapi-v3-types: ^1.0.12
+  - @loopback/openapi-v3: ^1.3.4
+  - @loopback/repository-json-schema: ^1.4.0
+  - @loopback/repository: ^1.4.0
+  - @loopback/rest: ^1.10.1
+  - @loopback/testlab: ^1.2.3
+  - @loopback/docs: ^1.13.0
+  - @loopback/example-hello-world: ^1.1.10
+  - @loopback/example-log-extension: ^1.1.10
+  - @loopback/example-rpc-server: ^1.1.9
+  - @loopback/example-todo: ^1.5.5
+  - @loopback/example-soap-calculator: ^1.4.5
+  - @loopback/service-proxy: ^1.1.3
+  - @loopback/http-caching-proxy: ^1.0.13
+  - @loopback/http-server: ^1.1.12
+  - @loopback/example-todo-list: ^1.5.5
   - @loopback/dist-util: ^0.4.0
-  - @loopback/rest-explorer: ^1.1.14
+  - @loopback/rest-explorer: ^1.1.15
   - @loopback/tslint-config: ^2.0.4
-  - @loopback/example-express-composition: ^1.2.4
-  - @loopback/example-greeter-extension: ^1.0.0
+  - @loopback/example-express-composition: ^1.2.5
+  - @loopback/example-greeter-extension: ^1.0.1
 
 2.创建项目
 >lb4 app
@@ -48,3 +48,59 @@ package.json中
 }
 >npm run dev
 index.js可以修改端口
+
+
+****************** 创建Model ******************
+>lb4 model
+? Model class name: Dic
+? Please select the model base class: Entity
+? Allow additional (free-form) properties? No
+
+? Enter the property name: DicID
+? Property type: number
+? Is id the ID property? Yes
+? Is it required?: No
+? Default value [leave blank for none]:
+注意：ID为主键的话，required为false
+
+? Enter the property name: DicType
+? Property type: string
+? Is it required?: Yes
+? Default value [leave blank for none]:
+
+? Enter the property name: DicValue
+? Property type: string
+? Is it required?: Yes
+? Default value [leave blank for none]:
+
+
+****************** 创建datasource ******************
+>lb4 datasource
+? Datasource name: db
+? Select the connector for db: In-memory db (supported by StrongLoop)
+? window.localStorage key to use for persistence (browser only):
+? Full path to file for persistence (server only): ./data/db.json
+在根目录创建data文件夹，里面创建db.json文件
+
+
+****************** 创建repository ******************
+>lb4 repository
+? Please select the datasource DbDatasource
+? Select the model(s) you want to generate a repository Dic
+? Please select the repository base class DefaultCrudRepository (Legacy juggler bridge)
+
+
+****************** 创建controller ******************
+>lb4 controller
+? Controller class name: Dic
+? What kind of controller would you like to generate? REST Controller with CRUD functions
+? What is the name of the model to use with this CRUD repository? Dic
+? What is the name of your CRUD repository? DicRepository
+? What is the type of your ID? number
+? What is the base HTTP path name of the CRUD operations? /dics
+
+
+patch，put，post区别
+patch只是局部更新，
+put是整个更新，
+post是添加新内容

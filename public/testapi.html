@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Test Api</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <form @submit.prevent="create" ref="form_create">
+        <input type="text" placeholder="DicType" name="DicType">
+        <input type="text" placeholder="DicValue" name="DicValue">
+        <input type="submit" value="Add">
+    </form>
+
+    <hr>
+    <form @submit.prevent="updateById" ref="form_update">
+        <input type="text" placeholder="DicID" name="DicID">
+        <input type="text" placeholder="DicType" name="DicType">
+        <input type="text" placeholder="DicValue" name="DicValue">
+        <input type="submit" value="Patch">
+    </form>
+
+    <hr>
+    <form @submit.prevent="replaceById" ref="form_put">
+        <input type="text" placeholder="DicID" name="DicID">
+        <input type="text" placeholder="DicType" name="DicType">
+        <input type="text" placeholder="DicValue" name="DicValue">
+        <input type="submit" value="Put">
+    </form>
+
+    <hr>
+    <form @submit.prevent="deleteById" ref="form_delete">
+        <input type="text" placeholder="DicID" name="DicID">
+        <input type="submit" value="Delete">
+    </form>
+
+    <hr>
+    <input type="text" placeholder="offset" v-model="filter.offset">
+    <input type="text" placeholder="limit" v-model="filter.limit">
+    <input type="text" placeholder="skip" v-model="filter.skip">
+    <input type="text" placeholder="order(eg:DicType DESC,DicValue)" v-model="filter.order">
+    <input type="text" placeholder="where" v-model="filter.where">
+
+    <input type="button" value="find" @click="find">
+
+    <hr>
+    <table border="1" cellpadding="0" cellspacing="0">
+        <thead>
+        <tr>
+            <td>DicID</td>
+            <td>DicType</td>
+            <td>DicValue</td>
+        </tr>
+        </thead>
+        <tbody id="table-dic">
+        <tr v-for="dic in dics">
+            <td>{{dic.DicID}}</td>
+            <td>{{dic.DicType}}</td>
+            <td>{{dic.DicValue}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<script>
+    //更多where条件过滤参考
+    //https://loopback.io/doc/en/lb2/Where-filter.html
+    var app = new Vue({
+        el: "#app",
+        data: {
+            dics: [],
+            filter: {
+                where: null,
+                offset: null,
+                limit: null,
+                skip: null,
+                order: null
+            }
+        },
+        methods: {
+            create() {
+                let data = {};
+                let form = [...this.$refs.form_create.elements];
+                form.filter(item => item.type === 'text').map(item => {
+                    data[item.name] = item.value;
+                });
+
+                axios.post('/dics', data).then((res) => {
+                    console.log(res.data);
+                }).catch(err => {
+                    alert(err);
+                })
+            },
+            updateById() {
+                let data = {};
+                let id = null;
+                let form = [...this.$refs.form_update.elements];
+                form.filter(item => item.type === 'text').map(item => {
+
+                    if (item.name === 'DicID') {
+                        id = item.value;
+                    }else{
+                        if(item.value){
+                            data[item.name] = item.value;
+                        }
+
+                    }
+                });
+
+                axios.patch('/dics/'+id, data).then((res) => {
+                    console.log(res.data);
+                }).catch(err => {
+                    alert(err);
+                })
+            },
+            replaceById() {
+                let data = {};
+                let id = null;
+                let form = [...this.$refs.form_put.elements];
+                form.filter(item => item.type === 'text').map(item => {
+
+                    if (item.name === 'DicID') {
+                        id = item.value;
+                    }else{
+                        if(item.value){
+                            data[item.name] = item.value;
+                        }
+
+                    }
+                });
+
+                axios.put('/dics/'+id, data).then((res) => {
+                    console.log(res.data);
+                }).catch(err => {
+                    alert(err);
+                })
+            },
+            deleteById(){
+                let data = {};
+                let id = null;
+                let form = [...this.$refs.form_delete.elements];
+                form.filter(item => item.type === 'text').map(item => {
+
+                    if (item.name === 'DicID') {
+                        id = item.value;
+                    }else{
+                        if(item.value){
+                            data[item.name] = item.value;
+                        }
+
+                    }
+                });
+
+                axios.delete('/dics/'+id, data).then((res) => {
+                    console.log(res.data);
+                }).catch(err => {
+                    alert(err);
+                })
+            },
+            find() {
+                let url = "?";
+                Object.keys(this.filter).map(key => {
+                    if (this.filter[key]) {
+                        if (key === 'where') {
+                            let k = this.filter[key].split("=")[0];
+                            let v = this.filter[key].split("=")[1];
+                            url += `filter[${key}][${k}]=${v}&`;
+                        } else {
+                            url += `filter[${key}]=${this.filter[key]}&`
+                        }
+
+                    }
+                });
+                url = url.replace(/&$/gi, '');
+                console.log(url);
+                axios.get('/dics' + url).then((res) => {
+                    this.dics = res.data;
+                })
+            }
+        }
+    })
+</script>
+</body>
+</html>

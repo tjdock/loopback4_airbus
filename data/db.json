@@ -1,0 +1,26 @@
+{
+  "ids": {
+    "User": 2,
+    "Dic": 2,
+    "GeneralInfo": 3,
+    "SpecificInfo": 6
+  },
+  "models": {
+    "User": {
+      "Admin": "{\"id\":\"ae7a87bc-6778-4f52-ac78-f0d22f72a2b6\",\"account\":\"Admin\",\"name\":\"Xunuo\",\"password\":\"vKxGyzFS+yjHefXXtZKJgTH43jE=\",\"role\":\"Admin\",\"lastActiveTime\":\"2019-04-11T01:52:52.251Z\"}"
+    },
+    "Dic": {
+      "1": "{\"type\":\"string\",\"value\":\"string\",\"id\":1}"
+    },
+    "GeneralInfo": {
+      "1": "{\"msn\":111,\"program\":\"LR\",\"id\":1}",
+      "2": "{\"msn\":222,\"program\":\"SR\",\"id\":2}"
+    },
+    "SpecificInfo": {
+      "2": "{\"generalInfoId\":2,\"customerName\":\"test\",\"id\":2}",
+      "3": "{\"generalInfoId\":2,\"customerName\":\"test\",\"id\":3}",
+      "4": "{\"generalInfoId\":2,\"customerName\":\"string\",\"id\":4}",
+      "5": "{\"generalInfoId\":3,\"customerName\":\"string\",\"id\":5}"
+    }
+  }
+}
