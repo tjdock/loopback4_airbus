@@ -7,13 +7,13 @@ import {GeneralInfoRepository} from "./general-info.repository";
 export class SpecificInfoRepository extends DefaultCrudRepository<SpecificInfo,
     typeof SpecificInfo.prototype.id> {
 
-    //public readonly generalInfo: BelongsToAccessor<GeneralInfo, typeof SpecificInfo.prototype.ID>;
+    public readonly generalInfo: BelongsToAccessor<GeneralInfo, typeof SpecificInfo.prototype.id>;
 
     constructor(
         @inject('datasources.db') dataSource: DbDataSource,
-        //@repository.getter('GeneralInfoRepository') specificInfoRepositoryGetter: Getter<GeneralInfoRepository>
+        @repository.getter('GeneralInfoRepository') specificInfoRepositoryGetter: Getter<GeneralInfoRepository>
     ) {
         super(SpecificInfo, dataSource);
-        //this.generalInfo = this.createBelongsToAccessorFor('generalInfo', specificInfoRepositoryGetter)
+        this.generalInfo = this.createBelongsToAccessorFor('generalInfo', specificInfoRepositoryGetter)
     }
 }

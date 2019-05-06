@@ -139,14 +139,8 @@ export class GeneralInfo extends Entity {
     })
     delFFM?: string;
 
-    // @property.array(SpecificInfo)
-    // specificInfos?:SpecificInfo[];
-
-    // @hasMany(() => SpecificInfo, {keyTo: 'GeneralInfoID'})
-    // specificInfos?: SpecificInfo[];
-
     @hasMany(() => SpecificInfo)
-    //@property.array(SpecificInfo)
+    @property.array(SpecificInfo)
     specificInfos?: SpecificInfo[];
 
     constructor(data?: Partial<GeneralInfo>) {

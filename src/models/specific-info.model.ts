@@ -10,8 +10,8 @@ export class SpecificInfo extends Entity {
   })
   id?: number;
 
-  //@belongsTo(()=>GeneralInfo,{keyTo:'generalInfoId'})
-  @property()
+  @belongsTo(()=>GeneralInfo)
+  //@property()
   generalInfoId?: number;
 
   @property({

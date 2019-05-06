@@ -16,13 +16,13 @@ import {
     del,
     requestBody,
 } from '@loopback/rest';
-import {SpecificInfo} from '../models';
+import {GeneralInfo, SpecificInfo} from '../models';
 import {GeneralInfoRepository, SpecificInfoRepository} from '../repositories';
 
 export class SpecificInfoController {
     constructor(
-        // @repository(SpecificInfoRepository)
-        // public specificInfoRepository: SpecificInfoRepository,
+        @repository(SpecificInfoRepository)
+        public specificInfoRepository: SpecificInfoRepository,
         //新增
         @repository(GeneralInfoRepository)
         protected generalInfoRepository: GeneralInfoRepository
@@ -198,5 +198,12 @@ export class SpecificInfoController {
         @param.query.object('where', getWhereSchemaFor(SpecificInfo)) where?: Where,
     ): Promise<Count> {
         return await this.generalInfoRepository.specificInfos(id).delete(where);
+    }
+
+    @get('/specific-info/{id}/general-info')
+    async getGeneralInfo(
+        @param.path.number('id') specificInfoId: typeof SpecificInfo.prototype.id,
+    ): Promise<GeneralInfo> {
+        return await this.specificInfoRepository.generalInfo(specificInfoId);
     }
 }
