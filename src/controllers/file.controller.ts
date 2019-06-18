@@ -1,8 +1,6 @@
 import {
   requestBody,
-  Response,
   RestBindings,
-  Request,
   post,
 } from '@loopback/rest';
 import {inject} from '@loopback/context';
@@ -10,6 +8,7 @@ import * as multer from 'multer';
 import {Count, repository, Where} from '@loopback/repository';
 import {GeneralInfoRepository} from '../repositories';
 import {GeneralInfo} from '../models';
+import {Request, Response} from "express";
 
 let XLSX = require('xlsx');
 
