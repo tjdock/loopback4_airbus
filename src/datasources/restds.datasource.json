@@ -1,0 +1,33 @@
+{
+  "name": "restds",
+  "connector": "rest",
+  "baseURL": "http://app.tuanhuiyuan.com/TuanVIP/index.php/Api/",
+  "crud": false,
+  "options": {
+    "headers": {
+      "accept": "application/json",
+      "content-type": "application/json"
+    }
+  },
+  "operations": [
+    {
+      "template": {
+        "method": "GET",
+        "url": "http://app.tuanhuiyuan.com/TuanVIP/index.php/Api/Ticket/GetTicketList",
+        "query": {
+          "CardID": "",
+          "Code": "",
+          "IsInteger": 0,
+          "Order": 0,
+          "PageIndex": "{pageIndex}",
+          "Token": "C2A855723EEA2DE3A69CCF0D2867B752",
+          "UserID": "0b1c3e82437585f3",
+          "strWhere": ""
+        }
+      },
+      "functions": {
+        "getTicketList": ["pageIndex"]
+      }
+    }
+  ]
+}

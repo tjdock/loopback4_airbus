@@ -104,3 +104,8 @@ patch，put，post区别
 patch只是局部更新，
 put是整个更新，
 post是添加新内容
+
+
+//调用API参考
+https://loopback.io/doc/en/lb4/todo-tutorial-geocoding-service.html
+https://loopback.io/doc/en/lb3/REST-connector.html

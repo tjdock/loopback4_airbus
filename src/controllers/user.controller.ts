@@ -37,6 +37,9 @@ export class UserController {
     })
     async create(@requestBody() user: User): Promise<User> {
         user.password = utils.hash(user.password);
+        if (user.account) {
+            user.account = user.account.toLowerCase();
+        }
 
         return await this.userRepository.create(user);
     }
@@ -96,7 +99,7 @@ export class UserController {
             },
         },
     })
-    async findById(@param.path.number('id') id: string): Promise<User> {
+    async findById(@param.path.string('id') id: string): Promise<User> {
         return await this.userRepository.findById(id);
     }
 
@@ -108,7 +111,7 @@ export class UserController {
         },
     })
     async updateById(
-        @param.path.number('id') id: string,
+        @param.path.string('id') id: string,
         @requestBody() user: User,
     ): Promise<void> {
         await this.userRepository.updateById(id, user);
@@ -122,7 +125,7 @@ export class UserController {
         },
     })
     async replaceById(
-        @param.path.number('id') id: string,
+        @param.path.string('id') id: string,
         @requestBody() user: User,
     ): Promise<void> {
         await this.userRepository.replaceById(id, user);
@@ -135,7 +138,7 @@ export class UserController {
             },
         },
     })
-    async deleteById(@param.path.number('id') id: string): Promise<void> {
+    async deleteById(@param.path.string('id') id: string): Promise<void> {
         await this.userRepository.deleteById(id);
     }
 
@@ -147,7 +150,7 @@ export class UserController {
             }
         }
     })
-    async login(@requestBody() user: User):Promise<User|null> {
+    async login(@requestBody() user: User): Promise<User | null> {
         return await this.userRepository.findOne(
             {where: {account: user.account, password: utils.hash(user.password)}}
         )

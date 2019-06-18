@@ -4,13 +4,14 @@ import {Entity, model, property} from '@loopback/repository';
 export class User extends Entity {
   @property({
     type: 'string',
-    defaultFn:'uuidv4'
+    defaultFn:'uuidv4',
+    id: true
   })
   id?: string;
 
+  //TODO 账号不能重复 没有找到合适的解决方案
   @property({
     type: 'string',
-    id: true
   })
   account?: string;
 
@@ -21,7 +22,7 @@ export class User extends Entity {
 
   @property({
     type: 'string',
-    required:true
+    required:false
   })
   password: string;
 

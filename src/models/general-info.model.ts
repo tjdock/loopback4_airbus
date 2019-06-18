@@ -12,7 +12,7 @@ export class GeneralInfo extends Entity {
     @property({
         type: 'number',
     })
-    msn?: number;
+    msn: number;
 
     @property({
         type: 'string',
@@ -37,7 +37,7 @@ export class GeneralInfo extends Entity {
     @property({
         type: 'string',
     })
-    CustomerOperator?: string;
+    customerOperator?: string;
 
     @property({
         type: 'string',
