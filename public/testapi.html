@@ -179,7 +179,11 @@
                 });
                 url = url.replace(/&$/gi, '');
                 console.log(url);
-                axios.get('/dics' + url).then((res) => {
+                axios.get('/dics' + url,{
+                    headers: {
+                                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM5MGYzMTkzLWFmNTItNDg5Zi1hNzQ5LWE4YzYxODI3MTA5YSIsIm5hbWUiOiJ4dW51byIsImlhdCI6MTU2MDkxMzU0NywiZXhwIjoxNTYwOTE0MTQ3fQ.qLtRTjl7RaSTCRsfmD9fE7Nullny_TgwgQHjNTFiRfo'
+                            }
+                }).then((res) => {
                     this.dics = res.data;
                 })
             }
