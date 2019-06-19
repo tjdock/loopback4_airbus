@@ -1,19 +1,29 @@
 import {Entity, model, property} from '@loopback/repository';
 
-@model()
+@model({
+  settings:{
+    indexes:{
+      uniqueEmail:{
+        keys:{email:1},//升序
+        options:{unique:true}
+      }
+    }
+  }
+})
 export class User extends Entity {
   @property({
     type: 'string',
     defaultFn:'uuidv4',
     id: true
   })
-  id?: string;
+  id: string;
 
-  //TODO 账号不能重复 没有找到合适的解决方案
+  //TODO 账号不能重复 json数据库没有找到合适的解决方案
   @property({
     type: 'string',
+    required:true
   })
-  account?: string;
+  email: string;
 
   @property({
     type: 'string',
