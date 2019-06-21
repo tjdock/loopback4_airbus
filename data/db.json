@@ -1,13 +1,13 @@
 {
   "ids": {
-    "User": 5,
+    "User": 6,
     "GeneralInfo": 47,
     "SpecificInfo": 6,
     "Dic": 131
   },
   "models": {
     "User": {
-      "390f3193-af52-489f-a749-a8c61827109a": "{\"id\":\"390f3193-af52-489f-a749-a8c61827109a\",\"email\":\"admin\",\"name\":\"xunuo\",\"password\":\"$2a$10$XO/tUShAe/9bVyZ/2IlVtOTF1.d2UKNukJE2UpY0GYjOAFv5doPYi\",\"lastActiveTime\":\"2019-06-19T02:23:20.832Z\"}"
+      "390f3193-af52-489f-a749-a8c61827109a": "{\"id\":\"390f3193-af52-489f-a749-a8c61827109a\",\"email\":\"admin\",\"name\":\"xunuo\",\"password\":\"123\",\"lastActiveTime\":\"2019-06-19T02:23:20.832Z\",\"role\":\"Admin\"}"
     },
     "GeneralInfo": {
       "24": "{\"msn\":8651,\"program\":\"LR\",\"cgcNotified\":\"2012-03-08T16:00:00.000Z\",\"cafNotified\":\"2012-03-20T00:00:00.000Z\",\"tacNotified\":\"2012-03-20T16:00:00.000Z\",\"totNotified\":\"2012-03-01T16:00:00.000Z\",\"cgcActual\":\"2012-03-20T00:00:00.000Z\",\"cafActual\":\"2012-03-20T00:00:00.000Z\",\"tacActual\":\"2012-03-20T00:00:00.000Z\",\"totActual\":\"2012-03-20T00:00:00.000Z\",\"id\":24}",
