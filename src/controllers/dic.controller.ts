@@ -18,8 +18,6 @@ import {
 } from '@loopback/rest';
 import {Dic} from '../models';
 import {DicRepository} from '../repositories';
-import {authenticate, AuthenticationBindings, UserProfile} from "@loopback/authentication";
-import {inject} from "@loopback/context";
 
 export class DicController {
   constructor(
@@ -65,9 +63,8 @@ export class DicController {
       },
     },
   })
-  @authenticate('jwt')
+
   async find(
-    @inject(AuthenticationBindings.CURRENT_USER) currentUser:UserProfile,
     @param.query.object('filter', getFilterSchemaFor(Dic)) filter?: Filter,
   ): Promise<Dic[]> {
     return await this.dicRepository.find(filter);
